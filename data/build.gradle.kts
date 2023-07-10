@@ -41,15 +41,17 @@ dependencies {
     // NETWORK
     implementation(AndroidDependencies.Network.Retrofit.plugin)
     implementation(AndroidDependencies.Network.Retrofit.converterMoshi)
-
     implementation(AndroidDependencies.Json.Moshi.plugin)
     kapt(AndroidDependencies.Json.Moshi.codegen)
-
     implementation(AndroidDependencies.Network.OkHttp.logging)
 
     implementation(AndroidDependencies.Logger.Timber.plugin)
 
     implementation(AndroidDependencies.Kotlin.Coroutine.plugin)
+
+    // PAGING
+    implementation(AndroidDependencies.AndroidX.Paging.core)
+    implementation(AndroidDependencies.AndroidX.Paging.compose)
 
     // DI
     implementation(AndroidDependencies.Di.Hilt.plugin)

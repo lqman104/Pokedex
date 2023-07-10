@@ -36,6 +36,7 @@ android {
 
 dependencies {
     implementation(project(":core"))
+    implementation(project(":data"))
     implementation(AndroidDependencies.AndroidX.CoreKtx.plugin)
     implementation(AndroidDependencies.Logger.Timber.plugin)
 
@@ -43,6 +44,10 @@ dependencies {
     // DI
     implementation(AndroidDependencies.Di.Hilt.plugin)
     kapt(AndroidDependencies.Di.Hilt.compiler)
+
+    // PAGING
+    implementation(AndroidDependencies.AndroidX.Paging.core)
+    implementation(AndroidDependencies.AndroidX.Paging.compose)
 
     testImplementation(AndroidDependencies.Test.JUnit.plugin)
     androidTestImplementation(AndroidDependencies.AndroidX.Test.JUnit.plugin)

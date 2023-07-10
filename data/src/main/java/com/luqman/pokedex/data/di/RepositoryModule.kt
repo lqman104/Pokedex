@@ -1,9 +1,9 @@
 package com.luqman.pokedex.data.di
 
-import com.luqman.pokedex.data.repository.DataSource
-import com.luqman.pokedex.data.repository.LocalDataSource
-import com.luqman.pokedex.data.repository.DataRepository
-import com.luqman.pokedex.data.repository.RemoteDataSource
+import com.luqman.pokedex.data.repository.PokemonDataSource
+import com.luqman.pokedex.data.repository.PokemonLocalDataSource
+import com.luqman.pokedex.data.repository.PokemonDataRepository
+import com.luqman.pokedex.data.repository.PokemonRemoteDataSource
 import com.luqman.pokedex.data.services.SomeService
 import dagger.Module
 import dagger.Provides
@@ -23,7 +23,7 @@ object RepositoryModule {
 
     @Provides
     @LocalSource
-    fun provideProvinceLocalDataSource(): DataSource = LocalDataSource(
+    fun provideProvinceLocalDataSource(): PokemonDataSource = PokemonLocalDataSource(
         Dispatchers.IO
     )
 
@@ -31,17 +31,17 @@ object RepositoryModule {
     @RemoteSource
     fun provideProvinceRemoteDataSource(
         someService: SomeService
-    ): DataSource = RemoteDataSource(
+    ): PokemonDataSource = PokemonRemoteDataSource(
         someService,
         Dispatchers.IO
     )
 
     @Provides
     fun provideProvinceRepository(
-        @RemoteSource remoteDataSource: DataSource,
-        @LocalSource localDataSource: DataSource
-    ): DataSource = DataRepository(
-        remoteDataSource = remoteDataSource,
-        localDataSource = localDataSource
+        @RemoteSource remotePokemonDataSource: PokemonDataSource,
+        @LocalSource localPokemonDataSource: PokemonDataSource
+    ): PokemonDataSource = PokemonDataRepository(
+        remotePokemonDataSource = remotePokemonDataSource,
+        localPokemonDataSource = localPokemonDataSource
     )
 }

@@ -1,5 +1,11 @@
 object AndroidDependencies {
     object AndroidX {
+        object Paging{
+            private const val version = "3.2.0-rc01"
+            val core = "androidx.paging:paging-runtime:$version"
+            val compose = "androidx.paging:paging-compose:$version"
+        }
+
         object Compose {
             private const val version = "1.4.3"
 
