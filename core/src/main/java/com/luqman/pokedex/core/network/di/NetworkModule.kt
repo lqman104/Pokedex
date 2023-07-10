@@ -2,7 +2,6 @@ package com.luqman.pokedex.core.network.di
 
 import com.luqman.pokedex.core.BuildConfig
 import com.luqman.pokedex.core.network.ApiEndpoint
-import com.luqman.pokedex.core.network.ApiEndpoint.API_KEY
 import com.luqman.pokedex.core.network.interceptor.ErrorInterceptor
 import com.luqman.pokedex.core.network.interceptor.HeaderInterceptor
 import com.luqman.pokedex.core.network.interceptor.JsonContentTypeInterceptor
@@ -29,7 +28,6 @@ object NetworkModule {
         val logging: HttpLoggingInterceptor = HttpLoggingInterceptor {
             Timber.tag("Api log: ").d(it)
         }.apply {
-            redactHeader(API_KEY)
             setLevel(HttpLoggingInterceptor.Level.BODY)
         }
 

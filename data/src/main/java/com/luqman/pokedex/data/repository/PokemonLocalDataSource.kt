@@ -1,13 +1,10 @@
 package com.luqman.pokedex.data.repository
 
-import com.luqman.pokedex.data.repository.model.PokemonResponse
-import kotlinx.coroutines.CoroutineDispatcher
+import com.luqman.pokedex.data.repository.model.Pokemon
 
-class PokemonLocalDataSource(
-    private val dispatcher: CoroutineDispatcher
-) : PokemonDataSource {
+class PokemonLocalDataSource : PokemonDataSource {
 
-    override suspend fun fetch(offside: Int, limit: Int): List<PokemonResponse> {
+    override suspend fun fetch(offset: Int, limit: Int): List<Pokemon> {
         return emptyList()
     }
 }

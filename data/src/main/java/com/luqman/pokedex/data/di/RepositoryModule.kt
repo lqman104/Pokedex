@@ -4,7 +4,7 @@ import com.luqman.pokedex.data.repository.PokemonDataSource
 import com.luqman.pokedex.data.repository.PokemonLocalDataSource
 import com.luqman.pokedex.data.repository.PokemonDataRepository
 import com.luqman.pokedex.data.repository.PokemonRemoteDataSource
-import com.luqman.pokedex.data.services.SomeService
+import com.luqman.pokedex.data.services.PokemonService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,21 +19,18 @@ object RepositoryModule {
     @Provides
     fun provideProvinceApiService(
         retrofit: Retrofit
-    ): SomeService = retrofit.create(SomeService::class.java)
+    ): PokemonService = retrofit.create(PokemonService::class.java)
 
     @Provides
     @LocalSource
-    fun provideProvinceLocalDataSource(): PokemonDataSource = PokemonLocalDataSource(
-        Dispatchers.IO
-    )
+    fun provideProvinceLocalDataSource(): PokemonDataSource = PokemonLocalDataSource()
 
     @Provides
     @RemoteSource
     fun provideProvinceRemoteDataSource(
-        someService: SomeService
+        pokemonService: PokemonService
     ): PokemonDataSource = PokemonRemoteDataSource(
-        someService,
-        Dispatchers.IO
+        pokemonService
     )
 
     @Provides

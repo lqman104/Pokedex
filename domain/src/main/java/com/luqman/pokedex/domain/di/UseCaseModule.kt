@@ -1,6 +1,7 @@
 package com.luqman.pokedex.domain.di
 
-import com.luqman.pokedex.domain.usecase.UseCase
+import com.luqman.pokedex.data.repository.PokemonDataSource
+import com.luqman.pokedex.domain.usecase.GetPokemonListUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,8 +12,10 @@ import dagger.hilt.android.components.ViewModelComponent
 object UseCaseModule {
 
     @Provides
-    fun provideUseCase(): UseCase {
-        return UseCase()
+    fun provideGetPokemonListUseCase(
+        repository: PokemonDataSource
+    ): GetPokemonListUseCase {
+        return GetPokemonListUseCase(repository)
     }
 
 }

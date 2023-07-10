@@ -11,8 +11,8 @@ class HeaderInterceptor : Interceptor {
         proceed(
             request()
                 .newBuilder()
-                .addHeader("key", "value")
                 .build()
+//                .addHeader("key", "value")
         )
     }
 }

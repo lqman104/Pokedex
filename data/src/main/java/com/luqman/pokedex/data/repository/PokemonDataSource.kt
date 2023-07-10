@@ -1,7 +1,7 @@
 package com.luqman.pokedex.data.repository
 
-import com.luqman.pokedex.data.repository.model.PokemonResponse
+import com.luqman.pokedex.data.repository.model.Pokemon
 
 interface PokemonDataSource {
-    suspend fun fetch(offside: Int, limit: Int): List<PokemonResponse>
+    suspend fun fetch(offset: Int, limit: Int): List<Pokemon>
 }

@@ -1,16 +1,17 @@
 package com.luqman.pokedex.data.repository
 
-import com.luqman.pokedex.data.repository.model.PokemonResponse
-import com.luqman.pokedex.data.services.SomeService
-import kotlinx.coroutines.CoroutineDispatcher
+import com.luqman.pokedex.data.repository.model.Pokemon
+import com.luqman.pokedex.data.repository.model.toPokemon
+import com.luqman.pokedex.data.services.PokemonService
 
 class PokemonRemoteDataSource(
-    private val someService: SomeService,
-    private val dispatcher: CoroutineDispatcher
+    private val pokemonService: PokemonService
 ) : PokemonDataSource {
 
-    override suspend fun fetch(offside: Int, limit: Int): List<PokemonResponse> {
-        return listOf()
+    override suspend fun fetch(offset: Int, limit: Int): List<Pokemon> {
+        return pokemonService.get(offset, limit).data.results?.map {
+            it.toPokemon()
+        } ?: emptyList()
     }
 
 }
