@@ -9,13 +9,82 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c311cea1-ade6-4569-aa04-eeac01e8396b" name="Changes" comment="" />
+    <list default="true" id="c311cea1-ade6-4569-aa04-eeac01e8396b" name="Changes" comment="rename package and add gitignore">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/src/main/java/com/luqman/pokedex/data/repository/DataSource.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.2/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.2/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.2/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/uikit/Template_Apps.uikit.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/luqman/template/ExampleInstrumentedTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/luqman/pokedex/ExampleInstrumentedTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/luqman/template/MyApplication.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/luqman/pokedex/MyApplication.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/luqman/template/helper/DateHelper.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/luqman/pokedex/helper/DateHelper.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/luqman/template/ui/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/luqman/pokedex/ui/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/luqman/template/ui/MainViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/luqman/pokedex/ui/MainViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/themes.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/test/java/com/luqman/template/ExampleUnitTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/java/com/luqman/pokedex/ExampleUnitTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buildSrc/.gradle/8.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/buildSrc/.gradle/8.2/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buildSrc/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/buildSrc/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buildSrc/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/buildSrc/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/core/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/androidTest/java/com/luqman/template/core/ExampleInstrumentedTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/uikit/src/androidTest/java/com/luqman/pokedex/uikit/ExampleInstrumentedTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/luqman/template/core/model/UiText.kt" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/luqman/pokedex/core/model/UiText.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/luqman/template/core/model/ValidationResult.kt" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/luqman/pokedex/core/model/ValidationResult.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/luqman/template/core/network/ApiEndpoint.kt" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/luqman/pokedex/core/network/ApiEndpoint.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/luqman/template/core/network/di/NetworkModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/luqman/pokedex/core/network/di/NetworkModule.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/luqman/template/core/network/exception/ApiException.kt" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/luqman/pokedex/core/network/exception/ApiException.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/luqman/template/core/network/interceptor/ErrorInterceptor.kt" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/luqman/pokedex/core/network/interceptor/ErrorInterceptor.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/luqman/template/core/network/interceptor/HeaderInterceptor.kt" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/luqman/pokedex/core/network/interceptor/HeaderInterceptor.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/luqman/template/core/network/interceptor/JsonInterceptor.kt" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/luqman/pokedex/core/network/interceptor/JsonInterceptor.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/luqman/template/core/network/model/BaseResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/luqman/pokedex/core/network/model/BaseResponse.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/test/java/com/luqman/template/core/ExampleUnitTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/test/java/com/luqman/pokedex/core/ExampleUnitTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/data/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/androidTest/java/com/luqman/template/data/ExampleInstrumentedTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/androidTest/java/com/luqman/pokedex/core/ExampleInstrumentedTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/com/luqman/template/data/di/Qualifiers.kt" beforeDir="false" afterPath="$PROJECT_DIR$/data/src/main/java/com/luqman/pokedex/data/di/Qualifiers.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/com/luqman/template/data/di/RepositoryModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/data/src/main/java/com/luqman/pokedex/data/di/RepositoryModule.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/com/luqman/template/data/repository/DataRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/data/src/main/java/com/luqman/pokedex/data/repository/DataRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/com/luqman/template/data/repository/DataSource.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/com/luqman/template/data/repository/LocalDataSource.kt" beforeDir="false" afterPath="$PROJECT_DIR$/data/src/main/java/com/luqman/pokedex/data/repository/LocalDataSource.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/com/luqman/template/data/repository/RemoteDataSource.kt" beforeDir="false" afterPath="$PROJECT_DIR$/data/src/main/java/com/luqman/pokedex/data/repository/RemoteDataSource.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/com/luqman/template/data/repository/model/Response.kt" beforeDir="false" afterPath="$PROJECT_DIR$/data/src/main/java/com/luqman/pokedex/data/repository/model/Response.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/com/luqman/template/data/services/SomeService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/data/src/main/java/com/luqman/pokedex/data/services/SomeService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/test/java/com/luqman/template/data/ExampleUnitTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/data/src/test/java/com/luqman/pokedex/data/ExampleUnitTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/domain/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/androidTest/java/com/luqman/template/domain/ExampleInstrumentedTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/com/luqman/template/domain/di/UseCaseModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/domain/src/main/java/com/luqman/pokedex/domain/di/UseCaseModule.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/com/luqman/template/domain/usecase/UseCase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/domain/src/main/java/com/luqman/pokedex/domain/usecase/UseCase.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/test/java/com/luqman/template/domain/ExampleUnitTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/test/java/com/luqman/template/domain/usecase/UseCaseTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/domain/src/test/java/com/luqman/pokedex/domain/usecase/UseCaseTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uikit/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/uikit/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uikit/src/androidTest/java/com/luqman/template/uikit/ExampleInstrumentedTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/domain/src/androidTest/java/com/luqman/pokedex/domain/ExampleInstrumentedTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uikit/src/main/java/com/luqman/template/uikit/component/DatePickerComponent.kt" beforeDir="false" afterPath="$PROJECT_DIR$/uikit/src/main/java/com/luqman/pokedex/uikit/component/DatePickerComponent.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uikit/src/main/java/com/luqman/template/uikit/component/DropdownComponent.kt" beforeDir="false" afterPath="$PROJECT_DIR$/uikit/src/main/java/com/luqman/pokedex/uikit/component/DropdownComponent.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uikit/src/main/java/com/luqman/template/uikit/component/SnackbarComponent.kt" beforeDir="false" afterPath="$PROJECT_DIR$/uikit/src/main/java/com/luqman/pokedex/uikit/component/SnackbarComponent.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uikit/src/main/java/com/luqman/template/uikit/theme/Color.kt" beforeDir="false" afterPath="$PROJECT_DIR$/uikit/src/main/java/com/luqman/pokedex/uikit/theme/Color.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uikit/src/main/java/com/luqman/template/uikit/theme/Theme.kt" beforeDir="false" afterPath="$PROJECT_DIR$/uikit/src/main/java/com/luqman/pokedex/uikit/theme/Theme.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uikit/src/main/java/com/luqman/template/uikit/theme/Type.kt" beforeDir="false" afterPath="$PROJECT_DIR$/uikit/src/main/java/com/luqman/pokedex/uikit/theme/Type.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uikit/src/test/java/com/luqman/template/uikit/ExampleUnitTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/domain/src/test/java/com/luqman/pokedex/domain/ExampleUnitTest.kt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/Users/luqmanhakim/.android/avd/Oppo_F1s_API_22.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/Users/luqmanhakim/.android/avd/Pixel_2_API_28.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -27,12 +96,18 @@
         <task path="$PROJECT_DIR$">
           <activation />
         </task>
+        <task path="$PROJECT_DIR$/app">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/domain">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Amar Bank" type="f1a62948:ProjectNode" />
+                <item name="pokedex Apps" type="f1a62948:ProjectNode" />
               </path>
             </expand>
             <select />
@@ -74,29 +149,30 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DEBUGGABLE_DEVICE": "Pixel_2_API_28 [emulator-5554]",
-    "DEBUGGABLE_PROCESS": "com.luqman.template",
-    "DEBUGGER_ID": "Auto",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "SHOW_ALL_PROCESSES": "false",
-    "cidr.known.project.marker": "true",
-    "com.intellij.openapi.externalSystem.service.settings.ExternalSystemGroupConfigurable": "ALL",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit4",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4": "",
-    "dart.analysis.tool.window.visible": "false",
-    "last_directory_selection": "/Users/luqmanhakim/Downloads/android-project/AmarBank/domain/src/test/java/com/luqman/amarbank/domain/usecase",
-    "last_opened_file_path": "/Users/luqmanhakim/Downloads/android-project/Pokedex",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.17",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
-    "show.migrate.to.gradle.popup": "false"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DEBUGGABLE_DEVICE&quot;: &quot;Pixel_2_API_28 [emulator-5554]&quot;,
+    &quot;DEBUGGABLE_PROCESS&quot;: &quot;com.luqman.template&quot;,
+    &quot;DEBUGGER_ID&quot;: &quot;Auto&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;SHOW_ALL_PROCESSES&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;com.intellij.openapi.externalSystem.service.settings.ExternalSystemGroupConfigurable&quot;: &quot;ALL&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit4&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4&quot;: &quot;&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;last_directory_selection&quot;: &quot;/Users/luqmanhakim/Downloads/android-project/AmarBank/domain/src/test/java/com/luqman/amarbank/domain/usecase&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/luqmanhakim/Downloads/android-project/Pokedex&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
   }
-}]]></component>
+}</component>
   <component name="PsdUISettings">
     <option name="BUILD_VARIANTS_TAB" value="Build Types" />
     <option name="LAST_EDITED_BUILD_TYPE" value="debug" />
@@ -134,7 +210,7 @@
   </component>
   <component name="RunManager" selected="Android App.app">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App">
-      <module name="Template_Apps.app.main" />
+      <module name="pokedex_Apps.app.main" />
       <option name="DEPLOY" value="true" />
       <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
       <option name="DEPLOY_AS_INSTANT" value="false" />
@@ -553,8 +629,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="add province repository" />
-    <MESSAGE value="add http log and clean the network class" />
     <MESSAGE value="create personal data screen" />
     <MESSAGE value="create address data screen" />
     <MESSAGE value="remove formatting color on BirthDateTextFiled" />
@@ -578,13 +652,15 @@
     <MESSAGE value="fix scroll state" />
     <MESSAGE value="add validation regex on ValidateBankAccount and ValidateNationalId" />
     <MESSAGE value="create unit test for use case" />
-    <option name="LAST_COMMIT_MESSAGE" value="create unit test for use case" />
+    <MESSAGE value="rename package" />
+    <MESSAGE value="rename package and add gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="rename package and add gitignore" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/luqman/template/ui/MainViewModel.kt</url>
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/luqman/pokedex/ui/MainViewModel.kt</url>
           <line>26</line>
           <option name="timeStamp" value="22" />
         </line-breakpoint>

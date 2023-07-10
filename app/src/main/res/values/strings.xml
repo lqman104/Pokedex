@@ -1,5 +1,5 @@
 <resources>
-  <string name="app_name">Template Apps</string>
+  <string name="app_name">pokedex Apps</string>
 
   <!--  personal data page-->
   <string name="national_id_label">KTP</string>

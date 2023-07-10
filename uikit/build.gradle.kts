@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.luqman.template.uikit"
+    namespace = "com.luqman.pokedex.uikit"
     compileSdk = AppConfig.Android.compileSdk
 
     defaultConfig {

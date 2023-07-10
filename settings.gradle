@@ -12,7 +12,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "Template Apps"
+rootProject.name = "pokedex Apps"
 include ':app'
 include ':data'
 include ':core'

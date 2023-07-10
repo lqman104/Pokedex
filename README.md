@@ -1,5 +1,5 @@
-# Template Apps
-This is the template for create new project
+# pokedex Apps
+This is the pokedex for create new project
 
 ## How to run this 
 - Download JDK 17 ([link](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html))

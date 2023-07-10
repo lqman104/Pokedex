@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.luqman.template"
+    namespace = "com.luqman.pokedex"
     compileSdk = AppConfig.Android.compileSdk
 
     defaultConfig {
-        applicationId = "com.luqman.template"
+        applicationId = "com.luqman.pokedex"
         minSdk = AppConfig.Android.minSdk
         targetSdk = AppConfig.Android.targetSdk
         versionCode = AppConfig.versionCode
