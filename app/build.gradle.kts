@@ -63,6 +63,9 @@ dependencies {
     implementation(AndroidDependencies.AndroidX.Compose.toolingPreview)
     implementation(AndroidDependencies.AndroidX.Compose.Material.plugin)
 
+    // IMAGE LOADER
+    implementation(AndroidDependencies.Util.ImageLoader.plugin)
+
     // DI
     implementation(AndroidDependencies.Di.Hilt.plugin)
     kapt(AndroidDependencies.Di.Hilt.compiler)

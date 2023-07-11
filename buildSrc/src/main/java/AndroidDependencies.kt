@@ -1,6 +1,6 @@
 object AndroidDependencies {
     object AndroidX {
-        object Paging{
+        object Paging {
             private const val version = "3.2.0-rc01"
             val core = "androidx.paging:paging-runtime:$version"
             val compose = "androidx.paging:paging-compose:$version"
@@ -61,6 +61,13 @@ object AndroidDependencies {
                 private const val version = "3.5.1"
                 val plugin = "androidx.test.espresso:espresso-core:$version"
             }
+        }
+    }
+
+    object Util {
+        object ImageLoader {
+            private const val version = "2.4.0"
+            const val plugin = "io.coil-kt:coil-compose:$version"
         }
     }
 
