@@ -6,6 +6,11 @@ object AndroidDependencies {
             val compose = "androidx.paging:paging-compose:$version"
         }
 
+        object Navigation {
+            private const val version = "2.6.0"
+            val plugin = "androidx.navigation:navigation-compose:$version"
+        }
+
         object Compose {
             private const val version = "1.4.3"
 
@@ -88,8 +93,10 @@ object AndroidDependencies {
     object Di {
         object Hilt {
             private const val version = "2.44"
+            private const val versionNavigation = "1.0.0"
             val plugin = "com.google.dagger:hilt-android:$version"
             val compiler = "com.google.dagger:hilt-compiler:$version"
+            val navigation = "androidx.hilt:hilt-navigation-compose:$versionNavigation"
         }
     }
 

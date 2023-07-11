@@ -34,7 +34,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
@@ -44,6 +45,7 @@ import com.luqman.pokedex.R
 import com.luqman.pokedex.core.model.asString
 import com.luqman.pokedex.core.network.exception.ApiException
 import com.luqman.pokedex.data.repository.model.Pokemon
+import com.luqman.pokedex.ui.Destination.DETAIL
 import com.luqman.pokedex.uikit.component.ErrorScreenComponent
 import com.luqman.pokedex.uikit.component.LoadingComponent
 import com.luqman.pokedex.uikit.component.LoadingItemComponent
@@ -51,18 +53,17 @@ import com.luqman.pokedex.uikit.theme.AppTheme
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 
-
 @Composable
 fun MainScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navController: NavHostController,
+    viewModel: MainViewModel = hiltViewModel(),
 ) {
-    val viewModel: MainViewModel = viewModel()
     val lazyPagingItems = viewModel.response.collectAsLazyPagingItems()
     val snackbarHostState = remember {
         SnackbarHostState()
     }
     val actionButton = stringResource(id = R.string.retry_button)
-
     val scope = rememberCoroutineScope()
 
     Scaffold(
@@ -87,15 +88,19 @@ fun MainScreen(
             },
             modifier = Modifier
                 .padding(padding),
+            onItemClicked = { name ->
+                navController.navigate(DETAIL + name)
+            }
         )
     }
 }
 
 @Composable
 fun MainContent(
+    modifier: Modifier = Modifier,
     list: LazyPagingItems<Pokemon>,
     onFailedGetNextPage: (String) -> Unit,
-    modifier: Modifier = Modifier
+    onItemClicked: (String) -> Unit
 ) {
     val scrollState = rememberLazyGridState()
 
@@ -118,7 +123,8 @@ fun MainContent(
         items(count = list.itemCount) { index ->
             val item = list[index]
             GridItem(pokemon = item) {
-
+                // onclick the pokemon list item
+                onItemClicked(it?.name.orEmpty())
             }
         }
 
@@ -227,6 +233,7 @@ fun MainContentPreview() {
             MainContent(
                 modifier = Modifier.fillMaxSize(),
                 list = flowOf(PagingData.from(emptyList<Pokemon>())).collectAsLazyPagingItems(),
+                onItemClicked = {},
                 onFailedGetNextPage = {}
             )
         }
