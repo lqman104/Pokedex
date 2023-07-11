@@ -6,10 +6,12 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyGridScope
@@ -28,7 +30,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -37,6 +41,7 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import coil.compose.AsyncImage
 import com.luqman.pokedex.R
 import com.luqman.pokedex.core.model.asString
 import com.luqman.pokedex.core.network.exception.ApiException
@@ -111,8 +116,8 @@ fun MainContent(
     LazyVerticalGrid(
         columns = GridCells.Fixed(CELL_COUNT),
         modifier = modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
         contentPadding = PaddingValues(16.dp),
         state = scrollState
     ) {
@@ -126,22 +131,39 @@ fun MainContent(
 
         items(count = list.itemCount) { index ->
             val item = list[index]
-            Card(
-                shape = MaterialTheme.shapes.small,
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
-                modifier = Modifier
-                    .fillMaxWidth()
-            ) {
-                Text(
-                    text = item?.name.orEmpty(),
-                    modifier = Modifier.padding(16.dp)
-                )
-            }
+            GridItem(pokemon = item)
         }
 
         handleAppendState(list.loadState.append) {
             onFailedGetNextPage(it)
         }
+    }
+}
+
+@Composable
+fun GridItem(pokemon: Pokemon?, modifier: Modifier = Modifier) {
+    Card(
+        shape = MaterialTheme.shapes.small,
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
+        modifier = modifier
+            .fillMaxWidth(),
+    ) {
+        AsyncImage(
+            model = pokemon?.image,
+            contentDescription = null,
+            placeholder = painterResource(com.luqman.pokedex.uikit.R.drawable.ic_img),
+            modifier = Modifier
+                .widthIn(max = 100.dp)
+                .fillMaxWidth()
+                .aspectRatio(1f)
+                .align(Alignment.CenterHorizontally)
+                .padding(4.dp),
+        )
+        Text(
+            text = pokemon?.name.orEmpty(),
+            modifier = Modifier.padding(16.dp)
+                .align(Alignment.CenterHorizontally)
+        )
     }
 }
 
