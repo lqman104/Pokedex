@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="timeout_error_exception">Tidak dapat menghubungkan keserver</string>
-  <string name="no_connection_error_exception">Tidak ada internet, coba periksa koneksi anda</string>
-  <string name="json_parsing_error_exception">Tidak dapat memuat data</string>
-  <string name="unknow_error_exception">Terjadi kesalahan aplikasi, coba lagi nanti</string>
+  <string name="timeout_error_exception_title">OOPS, Cannot connect to the server</string>
+  <string name="timeout_error_exception_message">Try again later or try to contact customer service</string>
+  <string name="no_connection_error_exception_title">Not internet connection</string>
+  <string name="no_connection_error_exception_message">Check your network connection and try again</string>
+  <string name="json_parsing_error_exception_title">Cannot load the data</string>
+  <string name="json_parsing_error_exception_message">Try to contact customer service</string>
+  <string name="unknown_error_exception_title">Uncaught exception</string>
+  <string name="unknown_error_exception_message">Try again later or try to contact customer service</string>
+  <string name="server_error_exception">Something error</string>
 </resources>

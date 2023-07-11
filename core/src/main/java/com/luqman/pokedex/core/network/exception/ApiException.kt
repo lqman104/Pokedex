@@ -21,26 +21,34 @@ import java.io.IOException
  */
 sealed class ApiException : IOException() {
 
+    abstract val titleMessage: UiText
     abstract val errorMessage: UiText
 
     object TimeoutError : ApiException() {
         override val errorMessage: UiText
-            get() = UiText.StringResource(R.string.timeout_error_exception)
+            get() = UiText.StringResource(R.string.timeout_error_exception_title)
+        override val titleMessage: UiText
+            get() = UiText.StringResource(R.string.timeout_error_exception_message)
     }
 
     object NoConnectionError : ApiException() {
         override val errorMessage: UiText
-            get() = UiText.StringResource(R.string.no_connection_error_exception)
+            get() = UiText.StringResource(R.string.no_connection_error_exception_message)
+        override val titleMessage: UiText
+            get() = UiText.StringResource(R.string.no_connection_error_exception_title)
     }
 
     object JsonParsingException : ApiException() {
         override val errorMessage: UiText
-            get() = UiText.StringResource(R.string.json_parsing_error_exception)
+            get() = UiText.StringResource(R.string.json_parsing_error_exception_message)
+        override val titleMessage: UiText
+            get() = UiText.StringResource(R.string.json_parsing_error_exception_title)
     }
 
     data class UnknownError(
         val throwable: Throwable,
-        override val errorMessage: UiText = UiText.StringResource(R.string.unknow_error_exception)
+        override val errorMessage: UiText = UiText.StringResource(R.string.unknown_error_exception_message),
+        override val titleMessage: UiText = UiText.StringResource(R.string.unknown_error_exception_title)
     ) : ApiException()
 
     class HttpApiException(
@@ -52,6 +60,9 @@ sealed class ApiException : IOException() {
             get() {
                 return UiText.DynamicText(message)
             }
+
+        override val titleMessage: UiText
+            get() = UiText.StringResource(R.string.server_error_exception)
 
     }
 }

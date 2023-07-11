@@ -29,5 +29,3 @@ data class PokemonResultsItem(
 	@Json(name="url")
 	val url: String? = null
 )
-
-typealias PokemonHttpResponse = BaseResponse<PokemonResponse>

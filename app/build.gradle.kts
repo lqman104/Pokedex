@@ -52,6 +52,7 @@ dependencies {
     implementation(project(":uikit"))
     implementation(project(":core"))
     implementation(project(":domain"))
+    implementation(project(":data"))
     implementation(AndroidDependencies.AndroidX.CoreKtx.plugin)
     implementation(AndroidDependencies.AndroidX.Lifecycle.plugin)
     implementation(AndroidDependencies.AndroidX.Compose.ViewModel.plugin)
@@ -67,6 +68,10 @@ dependencies {
     kapt(AndroidDependencies.Di.Hilt.compiler)
 
     implementation(AndroidDependencies.Logger.Timber.plugin)
+
+    // PAGING
+    implementation(AndroidDependencies.AndroidX.Paging.core)
+    implementation(AndroidDependencies.AndroidX.Paging.compose)
 
     testImplementation(AndroidDependencies.Test.JUnit.plugin)
     androidTestImplementation(AndroidDependencies.AndroidX.Test.JUnit.plugin)

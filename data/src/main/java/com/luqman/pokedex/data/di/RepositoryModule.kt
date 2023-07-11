@@ -30,7 +30,8 @@ object RepositoryModule {
     fun provideProvinceRemoteDataSource(
         pokemonService: PokemonService
     ): PokemonDataSource = PokemonRemoteDataSource(
-        pokemonService
+        pokemonService,
+        Dispatchers.IO
     )
 
     @Provides
