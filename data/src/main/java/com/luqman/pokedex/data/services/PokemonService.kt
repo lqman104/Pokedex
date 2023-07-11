@@ -8,10 +8,10 @@ import retrofit2.http.Query
 
 private const val LIMIT_QUERY = "limit"
 private const val OFFSET_QUERY = "offset"
-private const val NAME_PATH = "{name}"
+private const val NAME_PATH = "name"
 
 private const val POKEMON_ENDPOINT = "pokemon"
-private const val POKEMON_DETAIL_ENDPOINT = "pokemon/$NAME_PATH"
+private const val POKEMON_DETAIL_ENDPOINT = "pokemon/{$NAME_PATH}"
 
 interface PokemonService {
     @GET(POKEMON_ENDPOINT)
