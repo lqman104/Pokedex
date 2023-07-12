@@ -25,15 +25,21 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -42,6 +48,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.luqman.pokedex.R
+import com.luqman.pokedex.core.helper.MyHelper.titleCase
+import com.luqman.pokedex.core.model.UiText
 import com.luqman.pokedex.core.model.asString
 import com.luqman.pokedex.data.repository.model.PokemonDetail
 import com.luqman.pokedex.data.repository.model.PokemonStat
@@ -52,7 +60,6 @@ import com.luqman.pokedex.uikit.component.ErrorScreenComponent
 import com.luqman.pokedex.uikit.component.ImageComponent
 import com.luqman.pokedex.uikit.component.LoadingComponent
 import com.luqman.pokedex.uikit.theme.AppTheme
-import java.util.Locale
 
 @Composable
 fun DetailScreen(
@@ -61,19 +68,20 @@ fun DetailScreen(
     navHostController: NavHostController
 ) {
     val detailState = viewModel.detailPokemon.collectAsState().value
-    val isCaught = viewModel.catchState.collectAsState().value
+    val isCaughtState = viewModel.catchState.collectAsState().value
+    val storeState = viewModel.storeState.collectAsState().value
+    val snackbarHostState = remember {
+        SnackbarHostState()
+    }
 
-    if (isCaught != null) {
-        if (isCaught) {
+    if (isCaughtState != null) {
+        if (isCaughtState) {
             CaughtAlertDialogComponent(
-                onTextFieldChanged = {
-                    viewModel.setPokemonName(it)
-                },
                 onDismissClicked = {
                     viewModel.release()
                 },
                 onSaveClicked = {
-                    viewModel.store()
+                    viewModel.store(it)
                 }
             )
         } else {
@@ -81,48 +89,43 @@ fun DetailScreen(
         }
     }
 
-    DetailScaffold(
-        modifier = modifier,
-        detailScreenState = detailState,
-        onBackPressed = { navHostController.popBackStack() },
-        onRetryPressed = { viewModel.retry() },
-        onCatchClicked = { viewModel.catch() }
-    )
-}
-
-@Composable
-fun DetailScaffold(
-    detailScreenState: DetailScreenState,
-    onBackPressed: () -> Unit,
-    onRetryPressed: () -> Unit,
-    onCatchClicked: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Scaffold(
-        topBar = {
-            TobBarDetail {
-                onBackPressed()
+    when {
+        storeState.loading -> LoadingComponent(modifier.fillMaxSize())
+        storeState.errorMessage != null -> {
+            val context = LocalContext.current
+            LaunchedEffect(Unit) {
+                snackbarHostState.showSnackbar(
+                    storeState.errorMessage.asString(context),
+                    duration = SnackbarDuration.Long
+                )
             }
+        }
+
+        storeState.success -> {
+            navHostController.navigateUp()
+        }
+    }
+
+    Scaffold(
+        snackbarHost = {
+            SnackbarHost(hostState = snackbarHostState)
+        },
+        topBar = {
+            TobBarDetail { navHostController.navigateUp() }
         },
         bottomBar = {
-            ButtonCatch(modifier = Modifier.padding(16.dp), onClick = { onCatchClicked() })
+            ButtonCatch(modifier = Modifier.padding(16.dp), onClick = { viewModel.catch() })
         }
     ) { paddingValues ->
         Surface(modifier = modifier.padding(paddingValues)) {
             when {
-                detailScreenState.loading -> LoadingComponent(modifier.fillMaxSize())
-                detailScreenState.errorMessage != null -> ErrorScreenComponent(
-                    title = detailScreenState.errorMessage.asString(),
-                    showActionButton = true,
-                    actionButtonText = stringResource(id = R.string.retry_button),
-                    onActionButtonClicked = {
-                        // retry if the failed to get data
-                        onRetryPressed()
-                    }
-                )
+                detailState.loading -> LoadingComponent(modifier.fillMaxSize())
+                detailState.errorMessage != null -> PokemonErrorScreen(detailState.errorMessage) {
+                    viewModel.retry()
+                }
 
                 else -> {
-                    detailScreenState.data?.let {
+                    detailState.data?.let {
                         PokemonDetailComponent(
                             pokemonDetail = it,
                             modifier = Modifier.fillMaxSize()
@@ -135,13 +138,31 @@ fun DetailScaffold(
 }
 
 @Composable
+private fun PokemonErrorScreen(
+    errorMessage: UiText,
+    onRetryPressed: () -> Unit
+) {
+    ErrorScreenComponent(
+        title = errorMessage.asString(),
+        showActionButton = true,
+        actionButtonText = stringResource(id = R.string.retry_button),
+        onActionButtonClicked = {
+            // retry if the failed to get data
+            onRetryPressed()
+        }
+    )
+}
+
+@Composable
 fun PokemonDetailComponent(
     pokemonDetail: PokemonDetail,
     modifier: Modifier = Modifier
 ) {
     val scrollState = rememberScrollState()
     Column(
-        modifier = modifier.verticalScroll(scrollState).padding(horizontal = 16.dp),
+        modifier = modifier
+            .verticalScroll(scrollState)
+            .padding(horizontal = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         ImageComponent(
@@ -211,22 +232,29 @@ fun TypeRow(
 ) {
     Row(modifier = modifier) {
         listType.forEach {
-            Surface(
-                shape = MaterialTheme.shapes.large,
-                modifier = Modifier.padding(horizontal = 4.dp),
-                border = BorderStroke(
-                    width = 1.dp,
-                    color = MaterialTheme.colorScheme.secondary
-                )
-            ) {
-                Text(
-                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
-                    text = it.titleCase(),
-                    style = MaterialTheme.typography.labelMedium,
-                )
-            }
-
+            TypeItem(label = it.titleCase())
         }
+    }
+}
+
+@Composable
+fun TypeItem(
+    label: String,
+    modifier: Modifier = Modifier
+) {
+    Surface(
+        shape = MaterialTheme.shapes.large,
+        modifier = modifier.padding(horizontal = 4.dp),
+        border = BorderStroke(
+            width = 1.dp,
+            color = MaterialTheme.colorScheme.secondary
+        )
+    ) {
+        Text(
+            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+            text = label,
+            style = MaterialTheme.typography.labelMedium,
+        )
     }
 }
 
@@ -365,11 +393,6 @@ fun AbilityItem(
     }
 }
 
-private fun String.titleCase(): String {
-    return this.lowercase()
-        .replaceFirstChar { it.titlecase(Locale.getDefault()) }
-}
-
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun TobBarDetail(
@@ -411,29 +434,23 @@ fun ButtonCatch(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun DetailContentPreview() {
     AppTheme {
-        DetailScaffold(
-            onBackPressed = {},
-            onRetryPressed = {},
-            onCatchClicked = {},
-            detailScreenState = DetailScreenState(
-                loading = false,
-                data = PokemonDetail(
-                    id = 1,
-                    name = "test",
-                    customName = "testing",
-                    baseExperience = 123,
-                    height = 123,
-                    weight = 123,
-                    moves = listOf(),
-                    abilities = listOf("Run", "Hide"),
-                    stats = listOf(PokemonStat("Attack", 50), PokemonStat("Defense", 50)),
-                    imageUrl = "",
-                    types = listOf("water", "grass")
-                )
+        PokemonDetailComponent(
+            pokemonDetail = PokemonDetail(
+                id = 1,
+                name = "test",
+                customName = "testing",
+                baseExperience = 123,
+                height = 123,
+                weight = 123,
+                moves = listOf(),
+                abilities = listOf("Run", "Hide"),
+                stats = listOf(PokemonStat("Attack", 50), PokemonStat("Defense", 50)),
+                imageUrl = "",
+                types = listOf("water", "grass")
             )
         )
     }

@@ -51,7 +51,7 @@ fun Content() {
 
 }
 
-object Destination{
+object Destination {
     const val NAME_PARAMETER = "name"
 
     const val LIST = "list"

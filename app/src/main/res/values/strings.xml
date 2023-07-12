@@ -11,4 +11,5 @@
   <string name="try_again_text">Try again</string>
   <string name="not_caught_dialog_message">As pokemon trainer you can\'t surrender, try again!!!</string>
   <string name="not_caught_dialog_title">Don\'t give up</string>
+  <string name="name_empty_error">Name cannot be empty</string>
 </resources>

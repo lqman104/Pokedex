@@ -36,16 +36,10 @@ class DetailViewModel @Inject constructor(
     private val _catchState: MutableStateFlow<Boolean?> = MutableStateFlow(null)
     val catchState = _catchState.asStateFlow()
 
-    private var pokemonName: String? = null
-
     init {
         selectedPokemonName?.let {
             getPokemon(it)
         }
-    }
-
-    fun setPokemonName(name: String) {
-        pokemonName = name
     }
 
     fun retry() {
@@ -62,9 +56,9 @@ class DetailViewModel @Inject constructor(
         _catchState.value = null
     }
 
-    fun store() {
+    fun store(pokemonName: String) {
         detailPokemon.value.data?.let {
-            storeUseCase.invoke(it, pokemonName.orEmpty()).onEach { response ->
+            storeUseCase.invoke(it, pokemonName).onEach { response ->
                 when (response) {
                     is Resource.Success -> {
                         _storeState.value = StoreScreenState(success = true)

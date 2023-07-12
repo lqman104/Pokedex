@@ -22,7 +22,7 @@ data class PokemonDetail(
     val summaries: List<Summary> = listOf(
         Summary(
             title = R.string.weight,
-            value = "${(weight.toDouble() * 10.0).roundOffDecimal()}Kg"
+            value = "${(weight.toDouble() / 10.0).roundOffDecimal()}Kg"
         ),
         Summary(
             title = R.string.height,

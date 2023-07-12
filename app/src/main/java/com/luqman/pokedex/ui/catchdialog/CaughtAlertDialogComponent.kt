@@ -8,9 +8,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -19,13 +21,14 @@ import com.luqman.pokedex.R
 @Composable
 fun CaughtAlertDialogComponent(
     modifier: Modifier = Modifier,
-    errorText: String = "",
-    onTextFieldChanged: (String) -> Unit,
     onDismissClicked: () -> Unit,
-    onSaveClicked: () -> Unit,
+    onSaveClicked: (String) -> Unit,
 ) {
     var openDialog by remember { mutableStateOf(true) }
-    var text by remember { mutableStateOf("") }
+    var text by rememberSaveable{ mutableStateOf("") }
+    val isValid by remember {
+        derivedStateOf { text.isNotEmpty() }
+    }
 
     if (openDialog) {
         AlertDialog(
@@ -41,19 +44,24 @@ fun CaughtAlertDialogComponent(
                     TextField(
                         value = text,
                         onValueChange = {
-                            onTextFieldChanged(it)
                             text = it
                         }
                     )
-                    Text(text = errorText, color = MaterialTheme.colorScheme.error)
+                    if (!isValid) {
+                        Text(
+                            text = stringResource(id = R.string.name_empty_error),
+                            color = MaterialTheme.colorScheme.error
+                        )
+                    }
                 }
             },
             confirmButton = {
                 Button(
                     modifier = Modifier.fillMaxWidth(),
+                    enabled = isValid,
                     onClick = {
-                        onSaveClicked()
                         openDialog = false
+                        onSaveClicked(text)
                     }
                 ) {
                     Text(stringResource(id = R.string.save_button))
