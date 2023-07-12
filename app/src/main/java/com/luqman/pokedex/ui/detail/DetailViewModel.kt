@@ -36,10 +36,16 @@ class DetailViewModel @Inject constructor(
     private val _catchState: MutableStateFlow<Boolean?> = MutableStateFlow(null)
     val catchState = _catchState.asStateFlow()
 
+    private var pokemonName: String? = null
+
     init {
         selectedPokemonName?.let {
             getPokemon(it)
         }
+    }
+
+    fun setPokemonName(name: String) {
+        pokemonName = name
     }
 
     fun retry() {
@@ -47,19 +53,32 @@ class DetailViewModel @Inject constructor(
     }
 
     fun catch() {
-        _catchState.value = catchUseCase.invoke()
+        detailPokemon.value.data?.let {
+            _catchState.value = catchUseCase.invoke()
+        }
     }
 
-    fun store(name: String) {
+    fun release() {
+        _catchState.value = null
+    }
+
+    fun store() {
         detailPokemon.value.data?.let {
-            storeUseCase.invoke(it, name).onEach { response ->
-                _storeState.value = when (response) {
-                    is Resource.Success -> StoreScreenState(success = true)
-                    is Resource.Loading -> StoreScreenState(loading = true)
-                    is Resource.Error -> StoreScreenState(
-                        success = false,
-                        errorMessage = response.error
-                    )
+            storeUseCase.invoke(it, pokemonName.orEmpty()).onEach { response ->
+                when (response) {
+                    is Resource.Success -> {
+                        _storeState.value = StoreScreenState(success = true)
+                        _catchState.value = null
+                    }
+                    is Resource.Loading -> {
+                        _storeState.value = StoreScreenState(loading = true)
+                    }
+                    is Resource.Error -> {
+                        _storeState.value = StoreScreenState(
+                            success = false,
+                            errorMessage = response.error
+                        )
+                    }
                 }
             }.launchIn(viewModelScope)
         }

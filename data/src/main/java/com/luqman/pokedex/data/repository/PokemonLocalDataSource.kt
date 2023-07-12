@@ -37,8 +37,8 @@ class PokemonLocalDataSource(
         withContext(dispatcher) {
             val pokemonEntity = MyPokemonEntity(
                 pokemonId = pokemon.id,
-                name = name,
-                customName = pokemon.name,
+                name = pokemon.name,
+                customName = name,
                 url = pokemon.url
             )
             pokemonDao.insert(pokemonEntity)

@@ -2,7 +2,6 @@ package com.luqman.pokedex.ui.detail
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,11 +14,14 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -31,6 +33,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -43,6 +46,8 @@ import com.luqman.pokedex.core.model.asString
 import com.luqman.pokedex.data.repository.model.PokemonDetail
 import com.luqman.pokedex.data.repository.model.PokemonStat
 import com.luqman.pokedex.data.repository.model.Summary
+import com.luqman.pokedex.ui.catchdialog.CaughtAlertDialogComponent
+import com.luqman.pokedex.ui.catchdialog.NotCaughtAlertDialogComponent
 import com.luqman.pokedex.uikit.component.ErrorScreenComponent
 import com.luqman.pokedex.uikit.component.ImageComponent
 import com.luqman.pokedex.uikit.component.LoadingComponent
@@ -55,13 +60,33 @@ fun DetailScreen(
     viewModel: DetailViewModel = hiltViewModel(),
     navHostController: NavHostController
 ) {
-    val state = viewModel.detailPokemon.collectAsState()
+    val detailState = viewModel.detailPokemon.collectAsState().value
+    val isCaught = viewModel.catchState.collectAsState().value
+
+    if (isCaught != null) {
+        if (isCaught) {
+            CaughtAlertDialogComponent(
+                onTextFieldChanged = {
+                    viewModel.setPokemonName(it)
+                },
+                onDismissClicked = {
+                    viewModel.release()
+                },
+                onSaveClicked = {
+                    viewModel.store()
+                }
+            )
+        } else {
+            NotCaughtAlertDialogComponent()
+        }
+    }
 
     DetailScaffold(
         modifier = modifier,
-        detailScreenState = state.value,
+        detailScreenState = detailState,
         onBackPressed = { navHostController.popBackStack() },
-        onRetryPressed = { viewModel.retry() }
+        onRetryPressed = { viewModel.retry() },
+        onCatchClicked = { viewModel.catch() }
     )
 }
 
@@ -70,6 +95,7 @@ fun DetailScaffold(
     detailScreenState: DetailScreenState,
     onBackPressed: () -> Unit,
     onRetryPressed: () -> Unit,
+    onCatchClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
@@ -77,6 +103,9 @@ fun DetailScaffold(
             TobBarDetail {
                 onBackPressed()
             }
+        },
+        bottomBar = {
+            ButtonCatch(modifier = Modifier.padding(16.dp), onClick = { onCatchClicked() })
         }
     ) { paddingValues ->
         Surface(modifier = modifier.padding(paddingValues)) {
@@ -112,7 +141,7 @@ fun PokemonDetailComponent(
 ) {
     val scrollState = rememberScrollState()
     Column(
-        modifier = modifier.verticalScroll(scrollState),
+        modifier = modifier.verticalScroll(scrollState).padding(horizontal = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         ImageComponent(
@@ -153,7 +182,6 @@ fun PokemonDetailComponent(
             fontWeight = FontWeight.SemiBold,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp)
         )
 
         Spacer(modifier = Modifier.padding(4.dp))
@@ -168,7 +196,6 @@ fun PokemonDetailComponent(
             fontWeight = FontWeight.SemiBold,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp)
         )
 
         Spacer(modifier = Modifier.padding(4.dp))
@@ -277,7 +304,6 @@ fun StatItem(
 
     Row(
         modifier = modifier
-            .padding(horizontal = 16.dp)
             .height(40.dp),
         horizontalArrangement = Arrangement.SpaceAround,
         verticalAlignment = Alignment.CenterVertically
@@ -326,7 +352,7 @@ fun AbilityItem(
         shape = MaterialTheme.shapes.small,
         color = MaterialTheme.colorScheme.secondaryContainer,
         modifier = modifier
-            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .padding(vertical = 8.dp)
     ) {
         Text(
             text = value.titleCase(),
@@ -351,18 +377,38 @@ fun TobBarDetail(
     onBackPressed: () -> Unit
 ) {
     TopAppBar(
-        modifier = modifier.padding(horizontal = 16.dp),
+        modifier = modifier,
         title = {},
         navigationIcon = {
-            Icon(
-                imageVector = Icons.Default.ArrowBack,
-                contentDescription = stringResource(id = R.string.button_back),
-                modifier = Modifier.clickable {
+            IconButton(
+                modifier = Modifier.clip(CircleShape),
+                onClick = {
                     onBackPressed()
                 }
-            )
+            ) {
+                Icon(
+                    imageVector = Icons.Default.ArrowBack,
+                    contentDescription = stringResource(id = R.string.button_back)
+                )
+            }
+
         }
     )
+}
+
+@Composable
+fun ButtonCatch(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Button(
+        modifier = modifier.fillMaxWidth(),
+        onClick = {
+            onClick()
+        }
+    ) {
+        Text(text = stringResource(id = R.string.catch_button))
+    }
 }
 
 @Preview
@@ -372,6 +418,7 @@ fun DetailContentPreview() {
         DetailScaffold(
             onBackPressed = {},
             onRetryPressed = {},
+            onCatchClicked = {},
             detailScreenState = DetailScreenState(
                 loading = false,
                 data = PokemonDetail(

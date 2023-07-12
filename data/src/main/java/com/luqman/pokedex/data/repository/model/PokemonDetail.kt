@@ -1,6 +1,7 @@
 package com.luqman.pokedex.data.repository.model
 
 import androidx.annotation.StringRes
+import com.luqman.pokedex.core.helper.MyHelper.roundOffDecimal
 import com.luqman.pokedex.data.R
 import com.luqman.pokedex.data.services.dto.PokemonDetailResponse
 
@@ -21,11 +22,11 @@ data class PokemonDetail(
     val summaries: List<Summary> = listOf(
         Summary(
             title = R.string.weight,
-            value = "${weight}Kg"
+            value = "${(weight.toDouble() * 10.0).roundOffDecimal()}Kg"
         ),
         Summary(
             title = R.string.height,
-            value = "${weight}m"
+            value = "${(height / 10.0).roundOffDecimal()}m"
         ),
         Summary(
             title = R.string.base_exp,

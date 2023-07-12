@@ -1,4 +1,4 @@
-package com.luqman.pokedex.helper
+package com.luqman.pokedex.core.helper
 
 import java.text.SimpleDateFormat
 import java.util.Date
