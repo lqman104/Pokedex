@@ -4,15 +4,16 @@ import com.luqman.pokedex.core.model.Resource
 import com.luqman.pokedex.core.model.toUiText
 import com.luqman.pokedex.core.network.exception.ApiException
 import com.luqman.pokedex.data.repository.PokemonDataSource
-import com.luqman.pokedex.data.repository.model.Pokemon
+import com.luqman.pokedex.data.repository.model.PokemonDetail
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
-class StorePokemonUseCase(
+class StorePokemonUseCase @Inject constructor(
     private val pokemonDataSource: PokemonDataSource
 ) {
     operator fun invoke(
-        pokemon: Pokemon,
+        pokemon: PokemonDetail,
         name: String
     ): Flow<Resource<Any>> = flow {
         try {

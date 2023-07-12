@@ -7,8 +7,9 @@ import com.luqman.pokedex.data.repository.PokemonDataSource
 import com.luqman.pokedex.data.repository.model.Pokemon
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
-class DeletePokemonUseCase(
+class DeletePokemonUseCase @Inject constructor(
     private val pokemonDataSource: PokemonDataSource
 ) {
     operator fun invoke(

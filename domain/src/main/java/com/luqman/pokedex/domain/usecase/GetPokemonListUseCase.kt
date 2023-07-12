@@ -7,8 +7,9 @@ import com.luqman.pokedex.data.repository.PokemonDataSource
 import com.luqman.pokedex.data.repository.PokemonPagingDataSource
 import com.luqman.pokedex.data.repository.model.Pokemon
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class GetPokemonListUseCase(
+class GetPokemonListUseCase @Inject constructor(
     private val pokemonDataSource: PokemonDataSource
 ) {
 
