@@ -6,4 +6,7 @@ import com.luqman.pokedex.data.repository.model.PokemonDetail
 interface PokemonDataSource {
     suspend fun fetch(offset: Int, limit: Int): List<Pokemon>
     suspend fun get(name: String): PokemonDetail
+    suspend fun getAll(): List<Pokemon>
+    suspend fun catch(pokemon: Pokemon, name: String)
+    suspend fun release(id: Int)
 }

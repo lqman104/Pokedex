@@ -1,6 +1,7 @@
 package com.luqman.pokedex.domain.di
 
 import com.luqman.pokedex.data.repository.PokemonDataSource
+import com.luqman.pokedex.domain.usecase.GetMyPokemonListUseCase
 import com.luqman.pokedex.domain.usecase.GetPokemonDetailUseCase
 import com.luqman.pokedex.domain.usecase.GetPokemonListUseCase
 import dagger.Module
@@ -24,6 +25,13 @@ object UseCaseModule {
         repository: PokemonDataSource
     ): GetPokemonDetailUseCase {
         return GetPokemonDetailUseCase(repository)
+    }
+
+    @Provides
+    fun provideGetMyPokemonUseCase(
+        repository: PokemonDataSource
+    ): GetMyPokemonListUseCase {
+        return GetMyPokemonListUseCase(repository)
     }
 
 }

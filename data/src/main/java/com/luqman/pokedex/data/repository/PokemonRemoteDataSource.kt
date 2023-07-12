@@ -1,5 +1,6 @@
 package com.luqman.pokedex.data.repository
 
+import com.luqman.pokedex.core.exception.ImplementationShouldNotCalledException
 import com.luqman.pokedex.data.repository.model.Pokemon
 import com.luqman.pokedex.data.repository.model.PokemonDetail
 import com.luqman.pokedex.data.repository.model.toPokemon
@@ -14,7 +15,7 @@ class PokemonRemoteDataSource(
 ) : PokemonDataSource {
 
     override suspend fun fetch(offset: Int, limit: Int): List<Pokemon> {
-        return withContext(dispatcher){
+        return withContext(dispatcher) {
             pokemonService.getAll(offset, limit).results?.map {
                 it.toPokemon()
             } ?: emptyList()
@@ -22,9 +23,23 @@ class PokemonRemoteDataSource(
     }
 
     override suspend fun get(name: String): PokemonDetail {
-        return withContext(dispatcher){
+        return withContext(dispatcher) {
             val response = pokemonService.get(name)
             response.toPokemonDetail()
         }
+    }
+
+    override suspend fun getAll(): List<Pokemon> {
+        throw ImplementationShouldNotCalledException()
+
+    }
+
+    override suspend fun catch(pokemon: Pokemon, name: String) {
+        throw ImplementationShouldNotCalledException()
+
+    }
+
+    override suspend fun release(id: Int) {
+        throw ImplementationShouldNotCalledException()
     }
 }
