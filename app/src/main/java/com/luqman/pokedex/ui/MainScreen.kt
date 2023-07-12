@@ -30,7 +30,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -40,13 +39,13 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import coil.compose.AsyncImage
 import com.luqman.pokedex.R
 import com.luqman.pokedex.core.model.asString
 import com.luqman.pokedex.core.network.exception.ApiException
 import com.luqman.pokedex.data.repository.model.Pokemon
 import com.luqman.pokedex.ui.Destination.DETAIL
 import com.luqman.pokedex.uikit.component.ErrorScreenComponent
+import com.luqman.pokedex.uikit.component.ImageComponent
 import com.luqman.pokedex.uikit.component.LoadingComponent
 import com.luqman.pokedex.uikit.component.LoadingItemComponent
 import com.luqman.pokedex.uikit.theme.AppTheme
@@ -149,10 +148,8 @@ fun GridItem(
                 onClickItem(pokemon)
             },
     ) {
-        AsyncImage(
+        ImageComponent(
             model = pokemon?.image,
-            contentDescription = null,
-            placeholder = painterResource(com.luqman.pokedex.uikit.R.drawable.ic_img),
             modifier = Modifier
                 .widthIn(max = 100.dp)
                 .fillMaxWidth()

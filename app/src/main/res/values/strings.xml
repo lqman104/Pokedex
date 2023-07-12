@@ -1,4 +1,7 @@
 <resources>
   <string name="app_name">Pokedex</string>
   <string name="retry_button">Retry</string>
+  <string name="button_back">Button Back</string>
+  <string name="stats">Pokemon Stats</string>
+  <string name="abilities">Abilities</string>
 </resources>

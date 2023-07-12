@@ -19,15 +19,19 @@ class DetailViewModel @Inject constructor(
     private val detailUseCase: GetPokemonDetailUseCase
 ): ViewModel() {
 
+    private val selectedPokemonName = state.get<String>(NAME_PARAMETER)
     private val _detailPokemon: MutableStateFlow<DetailScreenState> =
         MutableStateFlow(DetailScreenState())
     val detailPokemon = _detailPokemon.asStateFlow()
 
     init {
-        val name = state.get<String>(NAME_PARAMETER)
-        name?.let {
+        selectedPokemonName?.let {
             getPokemon(it)
         }
+    }
+
+    fun retry() {
+        selectedPokemonName?.let { getPokemon(it) }
     }
 
     private fun getPokemon(name: String){

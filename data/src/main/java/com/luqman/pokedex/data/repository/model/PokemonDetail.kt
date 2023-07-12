@@ -1,5 +1,7 @@
 package com.luqman.pokedex.data.repository.model
 
+import androidx.annotation.StringRes
+import com.luqman.pokedex.data.R
 import com.luqman.pokedex.data.services.dto.PokemonDetailResponse
 
 data class PokemonDetail(
@@ -10,9 +12,31 @@ data class PokemonDetail(
     val height: Int,
     val weight: Int,
     val moves: List<String>,
+    val types: List<String>,
     val abilities: List<String>,
     val stats: List<PokemonStat>,
     val imageUrl: String,
+) {
+    val summaries: List<Summary> = listOf(
+        Summary(
+            title = R.string.weight,
+            value = "${weight}Kg"
+        ),
+        Summary(
+            title = R.string.height,
+            value = "${weight}m"
+        ),
+        Summary(
+            title = R.string.base_exp,
+            value = "$baseExperience"
+        )
+    )
+
+}
+
+data class Summary(
+    @StringRes val title: Int,
+    val value: String
 )
 
 data class PokemonStat(
@@ -43,6 +67,9 @@ fun PokemonDetailResponse.toPokemonDetail(): PokemonDetail {
                 value = it.baseStat ?: 0
             )
         }.orEmpty(),
-        imageUrl = image,
+        types = types?.map {
+            it.type?.name.orEmpty()
+        }.orEmpty(),
+        imageUrl = image
     )
 }

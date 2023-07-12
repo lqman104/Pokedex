@@ -27,7 +27,7 @@ import com.luqman.pokedex.uikit.theme.AppTheme
 fun ErrorScreenComponent(
     modifier: Modifier = Modifier,
     title: String,
-    message: String,
+    message: String? = null,
     actionButtonText: String = "",
     showActionButton: Boolean = false,
     onActionButtonClicked: () -> Unit = {},
@@ -53,15 +53,17 @@ fun ErrorScreenComponent(
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(horizontal = 16.dp)
         )
-        Text(
-            text = message,
-            style = MaterialTheme.typography.bodyLarge,
-            color = MaterialTheme.colorScheme.primary,
-            textAlign = TextAlign.Center,
-            modifier = Modifier
-                .padding(horizontal = 16.dp)
-                .padding(top = 4.dp)
-        )
+        if (message != null) {
+            Text(
+                text = message,
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.primary,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .padding(horizontal = 16.dp)
+                    .padding(top = 4.dp)
+            )
+        }
 
         if (showActionButton)
             Spacer(modifier = Modifier.padding(12.dp))

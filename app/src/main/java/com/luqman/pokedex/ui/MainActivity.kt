@@ -43,6 +43,7 @@ fun Content() {
             arguments = listOf(navArgument(NAME_PARAMETER) { type = NavType.StringType })
         ) {
             DetailScreen(
+                navHostController = navigationController,
                 modifier = Modifier.fillMaxSize()
             )
         }

@@ -44,6 +44,10 @@ dependencies {
     implementation(AndroidDependencies.AndroidX.Compose.graphics)
     implementation(AndroidDependencies.AndroidX.Compose.toolingPreview)
     implementation(AndroidDependencies.AndroidX.Compose.Material.plugin)
+
+    // IMAGE LOADER
+    implementation(AndroidDependencies.Util.ImageLoader.plugin)
+
     debugImplementation(AndroidDependencies.AndroidX.Compose.Test.tooling)
     debugImplementation(AndroidDependencies.AndroidX.Compose.Test.manifest)
 
