@@ -45,6 +45,14 @@ object AndroidDependencies {
             }
         }
 
+        object Room {
+            private const val version = "2.5.2"
+
+            val runtime = "androidx.room:room-runtime:$version"
+            val compiler = "androidx.room:room-compiler:$version"
+            val testing = "androidx.room:room-testing:$version"
+        }
+
         object CoreKtx {
             private const val version = "1.8.0"
             val plugin = "androidx.core:core-ktx:$version"

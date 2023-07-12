@@ -53,6 +53,11 @@ dependencies {
     implementation(AndroidDependencies.AndroidX.Paging.core)
     implementation(AndroidDependencies.AndroidX.Paging.compose)
 
+    // DATABASE
+    implementation(AndroidDependencies.AndroidX.Room.runtime)
+    kapt(AndroidDependencies.AndroidX.Room.compiler)
+    testImplementation(AndroidDependencies.AndroidX.Room.testing)
+
     // DI
     implementation(AndroidDependencies.Di.Hilt.plugin)
     kapt(AndroidDependencies.Di.Hilt.compiler)
