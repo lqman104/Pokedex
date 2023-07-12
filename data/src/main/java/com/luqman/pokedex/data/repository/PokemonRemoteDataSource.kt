@@ -34,7 +34,7 @@ class PokemonRemoteDataSource(
 
     }
 
-    override suspend fun catch(pokemon: Pokemon, name: String) {
+    override suspend fun catch(pokemon: PokemonDetail, name: String) {
         throw ImplementationShouldNotCalledException()
 
     }

@@ -17,6 +17,7 @@ data class PokemonDetail(
     val stats: List<PokemonStat>,
     val imageUrl: String,
 ) {
+    val url: String = "https://pokeapi.co/api/v2/pokemon/${id}"
     val summaries: List<Summary> = listOf(
         Summary(
             title = R.string.weight,

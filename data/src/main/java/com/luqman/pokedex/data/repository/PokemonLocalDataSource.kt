@@ -33,7 +33,7 @@ class PokemonLocalDataSource(
         }
     }
 
-    override suspend fun catch(pokemon: Pokemon, name: String) {
+    override suspend fun catch(pokemon: PokemonDetail, name: String) {
         withContext(dispatcher) {
             val pokemonEntity = MyPokemonEntity(
                 pokemonId = pokemon.id,

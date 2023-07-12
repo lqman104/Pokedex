@@ -1,6 +1,5 @@
 package com.luqman.pokedex.data.repository
 
-import com.luqman.pokedex.data.database.entity.MyPokemonEntity
 import com.luqman.pokedex.data.repository.model.Pokemon
 import com.luqman.pokedex.data.repository.model.PokemonDetail
 
@@ -21,7 +20,7 @@ class PokemonDataRepository(
         return localPokemonDataSource.getAll()
     }
 
-    override suspend fun catch(pokemon: Pokemon, name: String) {
+    override suspend fun catch(pokemon: PokemonDetail, name: String) {
         localPokemonDataSource.catch(pokemon, name)
     }
 
