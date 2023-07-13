@@ -64,7 +64,8 @@ fun MenuScreen(
             }
             composable(MainScreenMenu.MyPokemon.route) {
                 MyPokemonListScreen(
-                    snackbarHostState = snackbarHostState
+                    snackbarHostState = snackbarHostState,
+                    navHostController = navController
                 )
             }
         }

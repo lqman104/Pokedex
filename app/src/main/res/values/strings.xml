@@ -16,4 +16,7 @@
   <string name="my_pokemon_menu">My Pokemon</string>
   <string name="release_button">Release</string>
   <string name="success_release_message">Bye bye</string>
+  <string name="my_pokemon_empty_title">Are you a trainer??</string>
+  <string name="my_pokemon_empty_mesage">Come on, catch your first pokemon!!</string>
+  <string name="go">Go</string>
 </resources>

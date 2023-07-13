@@ -28,9 +28,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import com.luqman.pokedex.R
 import com.luqman.pokedex.core.model.asString
 import com.luqman.pokedex.data.repository.model.MyPokemon
+import com.luqman.pokedex.uikit.component.ErrorScreenComponent
 import com.luqman.pokedex.uikit.component.ImageComponent
 import com.luqman.pokedex.uikit.theme.AppTheme
 
@@ -38,7 +40,8 @@ import com.luqman.pokedex.uikit.theme.AppTheme
 fun MyPokemonListScreen(
     modifier: Modifier = Modifier,
     snackbarHostState: SnackbarHostState,
-    viewModel: MyPokemonListViewModel = hiltViewModel()
+    viewModel: MyPokemonListViewModel = hiltViewModel(),
+    navHostController: NavHostController
 ) {
     val state = viewModel.myPokemon.collectAsState().value
     val delete = viewModel.deleteState.collectAsState().value
@@ -50,19 +53,34 @@ fun MyPokemonListScreen(
                 viewModel.resetDeleteState()
             }
         }
+
         delete.success -> {
-            ShowSnackbar(stringResource(id =R.string.success_release_message), snackbarHostState) {
+            ShowSnackbar(stringResource(id = R.string.success_release_message), snackbarHostState) {
                 viewModel.resetDeleteState()
             }
         }
     }
 
     Surface {
-        MyPokemonListScreen(
-            modifier = modifier,
-            list = state
-        ) {
-            viewModel.release(it)
+        if (state.isEmpty()) {
+            ErrorScreenComponent(
+                modifier = Modifier.fillMaxSize(),
+                title = stringResource(id = R.string.my_pokemon_empty_title),
+                message = stringResource(id = R.string.my_pokemon_empty_mesage),
+                showActionButton = true,
+                actionButtonText = stringResource(
+                    id = R.string.go
+                )
+            ) {
+                navHostController.navigateUp()
+            }
+        } else {
+            MyPokemonListScreen(
+                modifier = modifier,
+                list = state
+            ) {
+                viewModel.release(it)
+            }
         }
     }
 }
@@ -71,7 +89,7 @@ fun MyPokemonListScreen(
 fun ShowSnackbar(
     message: String,
     snackbarHostState: SnackbarHostState,
-    onDismissed : () -> Unit
+    onDismissed: () -> Unit
 ) {
     LaunchedEffect(Unit) {
         val result = snackbarHostState.showSnackbar(
