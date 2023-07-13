@@ -35,7 +35,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -67,6 +69,9 @@ fun DetailScreen(
     viewModel: DetailViewModel = hiltViewModel(),
     navHostController: NavHostController
 ) {
+    var canShowCatchButton by remember {
+        mutableStateOf(false)
+    }
     val detailState = viewModel.detailPokemon.collectAsState().value
     val isCaughtState = viewModel.catchState.collectAsState().value
     val storeState = viewModel.storeState.collectAsState().value
@@ -114,7 +119,9 @@ fun DetailScreen(
             TobBarDetail { navHostController.navigateUp() }
         },
         bottomBar = {
-            ButtonCatch(modifier = Modifier.padding(16.dp), onClick = { viewModel.catch() })
+            if (canShowCatchButton) {
+                ButtonCatch(modifier = Modifier.padding(16.dp), onClick = { viewModel.catch() })
+            }
         }
     ) { paddingValues ->
         Surface(modifier = modifier.padding(paddingValues)) {
@@ -126,6 +133,7 @@ fun DetailScreen(
 
                 else -> {
                     detailState.data?.let {
+                        canShowCatchButton = true
                         PokemonDetailComponent(
                             pokemonDetail = it,
                             modifier = Modifier.fillMaxSize()

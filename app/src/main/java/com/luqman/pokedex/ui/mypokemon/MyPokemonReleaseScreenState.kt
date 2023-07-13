@@ -1,9 +1,8 @@
-package com.luqman.pokedex.ui.detail
+package com.luqman.pokedex.ui.mypokemon
 
 import com.luqman.pokedex.core.model.UiText
-import com.luqman.pokedex.data.repository.model.PokemonDetail
 
-data class DeleteScreenState(
+data class MyPokemonReleaseScreenState(
     val success: Boolean = false,
     val loading: Boolean = false,
     val errorMessage: UiText? = null

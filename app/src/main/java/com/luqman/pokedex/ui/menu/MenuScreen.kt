@@ -26,6 +26,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.luqman.pokedex.ui.Destination.DETAIL
 import com.luqman.pokedex.ui.list.ListScreen
+import com.luqman.pokedex.ui.mypokemon.MyPokemonListScreen
 
 @Composable
 fun MenuScreen(
@@ -62,10 +63,11 @@ fun MenuScreen(
                 )
             }
             composable(MainScreenMenu.MyPokemon.route) {
-                Text(text = "text")
+                MyPokemonListScreen(
+                    snackbarHostState = snackbarHostState
+                )
             }
         }
-
     }
 }
 
