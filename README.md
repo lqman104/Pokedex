@@ -5,8 +5,10 @@ The project integrate with https://pokeapi.co/ to get pokemon list.
 ## Screenshot
   <div style="display: flex; width: 100%">
   <img src="images/pokedex.png" width="31%"/>
+
   <img src="images/detail.png" width="31%"/>
-  <img src="images/detail.png" width="31%"/>
+
+  <img src="images/mypokemon.png" width="31%"/>
   </div>
 
 
