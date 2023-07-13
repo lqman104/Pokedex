@@ -1,18 +1,20 @@
 package com.luqman.pokedex.data.database.dao
 
 import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Upsert
 import com.luqman.pokedex.data.database.entity.MyPokemonEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface MyPokemonDao {
     @Query("SELECT * FROM my_pokemon_entity")
-    fun getAll(): List<MyPokemonEntity>
+    fun getAll(): Flow<List<MyPokemonEntity>>
 
-    @Upsert
-    fun insert(vararg pokemon: MyPokemonEntity)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(vararg pokemon: MyPokemonEntity)
 
     @Query("DELETE FROM my_pokemon_entity WHERE id=:id")
-    fun delete(id: Int)
+    suspend fun delete(id: Int)
 }

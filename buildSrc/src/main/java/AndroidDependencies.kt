@@ -49,6 +49,7 @@ object AndroidDependencies {
             private const val version = "2.5.2"
 
             val runtime = "androidx.room:room-runtime:$version"
+            val ktx = "androidx.room:room-ktx:$version"
             val compiler = "androidx.room:room-compiler:$version"
             val testing = "androidx.room:room-testing:$version"
         }

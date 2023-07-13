@@ -3,9 +3,13 @@ package com.luqman.pokedex.data.repository
 import com.luqman.pokedex.core.exception.ImplementationShouldNotCalledException
 import com.luqman.pokedex.data.database.dao.MyPokemonDao
 import com.luqman.pokedex.data.database.entity.MyPokemonEntity
+import com.luqman.pokedex.data.repository.model.MyPokemon
 import com.luqman.pokedex.data.repository.model.Pokemon
 import com.luqman.pokedex.data.repository.model.PokemonDetail
+import com.luqman.pokedex.data.repository.model.toMyPokemon
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
 class PokemonLocalDataSource(
@@ -21,14 +25,12 @@ class PokemonLocalDataSource(
         throw ImplementationShouldNotCalledException()
     }
 
-    override suspend fun getAll(): List<Pokemon> {
-        return withContext(dispatcher) {
+    override suspend fun getAll(): Flow<List<MyPokemon>> {
+        return withContext(context = dispatcher) {
             pokemonDao.getAll().map {
-                Pokemon(
-                    id = it.pokemonId,
-                    name = it.name,
-                    url = it.url
-                )
+                it.map { pokemon ->
+                    pokemon.toMyPokemon()
+                }
             }
         }
     }

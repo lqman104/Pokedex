@@ -55,6 +55,7 @@ dependencies {
 
     // DATABASE
     implementation(AndroidDependencies.AndroidX.Room.runtime)
+    implementation(AndroidDependencies.AndroidX.Room.ktx)
     kapt(AndroidDependencies.AndroidX.Room.compiler)
     testImplementation(AndroidDependencies.AndroidX.Room.testing)
 
