@@ -19,8 +19,6 @@ class DeletePokemonUseCase @Inject constructor(
             emit(Resource.Loading())
             pokemonDataSource.release(id)
             emit(Resource.Success(Any()))
-        } catch (e: ApiException) {
-            emit(Resource.Error(e.titleMessage))
         } catch (e: Exception) {
             emit(Resource.Error(e.toUiText()))
         }

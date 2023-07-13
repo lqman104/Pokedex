@@ -28,8 +28,6 @@ class StorePokemonUseCase @Inject constructor(
             emit(Resource.Loading())
             pokemonDataSource.catch(pokemon, name)
             emit(Resource.Success(Any()))
-        } catch (e: ApiException) {
-            emit(Resource.Error(e.titleMessage))
         } catch (e: Exception) {
             emit(Resource.Error(e.toUiText()))
         }
