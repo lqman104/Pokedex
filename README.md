@@ -3,17 +3,21 @@ This is simple pokemon directory app, you can catch the pokemon and make it your
 The project integrate with https://pokeapi.co/ to get pokemon list.
 
 ## Screenshot
-![Main menu](images/pokedex.png)
-![Detail](images/detail.png)
-![My pokemon](images/mypokemon.png)
+  <div style="display: flex; width: 100%">
+  <img src="images/pokedex.png" width="31%"/>
+  <img src="images/detail.png" width="31%"/>
+  <img src="images/detail.png" width="31%"/>
+  </div>
+
 
 ## PokeAPI
-
 <div>
 Pokedex uses [PokeAPI](https://pokeapi.co/) for fetching data related to Pokémon.
 
 <img src="https://user-images.githubusercontent.com/24237865/83422649-d1b1d980-a464-11ea-8c91-a24fdf89cd6b.png" align="right" width="21%"/>
 </div>
+
+
 
 ## How to run this 
 - Download JDK 17 ([link](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html))
