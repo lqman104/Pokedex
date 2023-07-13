@@ -15,6 +15,7 @@ import com.luqman.pokedex.ui.Destination.DETAIL_WITH_PARAMETER
 import com.luqman.pokedex.ui.Destination.LIST
 import com.luqman.pokedex.ui.Destination.NAME_PARAMETER
 import com.luqman.pokedex.ui.detail.DetailScreen
+import com.luqman.pokedex.ui.main.MainScreen
 import com.luqman.pokedex.uikit.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -36,7 +37,7 @@ fun Content() {
 
     NavHost(navController = navigationController, startDestination = LIST) {
         composable(LIST) {
-            MainScreen(navController = navigationController, modifier = Modifier.fillMaxSize())
+            MainScreen(mainNavController = navigationController, modifier = Modifier.fillMaxSize())
         }
         composable(
             route = DETAIL_WITH_PARAMETER,

@@ -12,4 +12,6 @@
   <string name="not_caught_dialog_message">As pokemon trainer you can\'t surrender, try again!!!</string>
   <string name="not_caught_dialog_title">Don\'t give up</string>
   <string name="name_empty_error">Name cannot be empty</string>
+  <string name="pokedex_menu">Pokedex</string>
+  <string name="my_pokemon_menu">My Pokemon</string>
 </resources>

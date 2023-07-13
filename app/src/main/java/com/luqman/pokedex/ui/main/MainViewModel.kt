@@ -1,4 +1,4 @@
-package com.luqman.pokedex.ui
+package com.luqman.pokedex.ui.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
