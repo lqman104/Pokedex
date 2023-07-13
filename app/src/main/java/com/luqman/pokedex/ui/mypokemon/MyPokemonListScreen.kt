@@ -147,6 +147,7 @@ fun PokemonItem(
             }
 
             Button(
+                modifier = Modifier.padding(end = 8.dp),
                 onClick = {
                     onReleaseClicked(pokemon)
                 }
@@ -157,7 +158,6 @@ fun PokemonItem(
             }
 
         }
-
     }
 }
 
