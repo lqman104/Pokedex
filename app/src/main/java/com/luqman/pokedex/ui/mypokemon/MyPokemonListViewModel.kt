@@ -20,11 +20,20 @@ class MyPokemonListViewModel @Inject constructor(
     private val deletePokemonUseCase: DeletePokemonUseCase
 ) : ViewModel() {
 
-    val myPokemon = getMyPokemonListUseCase()
+    private val _myPokemon: MutableStateFlow<List<MyPokemon>> = MutableStateFlow(listOf())
+    val myPokemon = _myPokemon.asStateFlow()
 
     private val _deleteState: MutableStateFlow<MyPokemonReleaseScreenState> =
         MutableStateFlow(MyPokemonReleaseScreenState())
     val deleteState = _deleteState.asStateFlow()
+
+    init {
+        viewModelScope.launch {
+            getMyPokemonListUseCase().collect {
+                _myPokemon.value = it.map { item -> item.copy() }
+            }
+        }
+    }
 
     fun release(id: Int) {
         deletePokemonUseCase.invoke(id).onEach { response ->
