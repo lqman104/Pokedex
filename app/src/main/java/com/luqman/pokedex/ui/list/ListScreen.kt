@@ -1,9 +1,8 @@
-package com.luqman.pokedex.ui.main
+package com.luqman.pokedex.ui.list
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,20 +15,13 @@ import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
-import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,13 +29,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavDestination.Companion.hierarchy
-import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
@@ -52,8 +37,6 @@ import com.luqman.pokedex.R
 import com.luqman.pokedex.core.model.asString
 import com.luqman.pokedex.core.network.exception.ApiException
 import com.luqman.pokedex.data.repository.model.Pokemon
-import com.luqman.pokedex.ui.Destination.DETAIL
-import com.luqman.pokedex.ui.menu.MainScreenMenu
 import com.luqman.pokedex.uikit.component.ErrorScreenComponent
 import com.luqman.pokedex.uikit.component.ImageComponent
 import com.luqman.pokedex.uikit.component.LoadingComponent
@@ -63,93 +46,37 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 
 @Composable
-fun MainScreen(
+fun ListScreen(
     modifier: Modifier = Modifier,
-    mainNavController: NavHostController,
-    viewModel: MainViewModel = hiltViewModel(),
+    snackbarHostState: SnackbarHostState,
+    viewModel: ListViewModel = hiltViewModel(),
+    onItemClicked: (String) -> Unit
 ) {
     val lazyPagingItems = viewModel.response.collectAsLazyPagingItems()
-    val snackbarHostState = remember {
-        SnackbarHostState()
-    }
-    val actionButton = stringResource(id = R.string.retry_button)
     val scope = rememberCoroutineScope()
-    val navController = rememberNavController()
+    val actionButton = stringResource(id = R.string.retry_button)
 
-    Scaffold(
+    ListScreen(
         modifier = modifier,
-        snackbarHost = {
-            SnackbarHost(hostState = snackbarHostState)
-        },
-        bottomBar = {
-            MainBottomBar(navController)
-        }
-    ) { padding: PaddingValues ->
-        NavHost(
-            modifier = Modifier.fillMaxSize().padding(padding),
-            navController = navController,
-            startDestination = MainScreenMenu.Pokedex.route,
-        ) {
-            composable(MainScreenMenu.Pokedex.route) {
-                MainContent(
-                    list = lazyPagingItems,
-                    onFailedGetNextPage = { message ->
-                        scope.launch {
-                            val result = snackbarHostState.showSnackbar(
-                                message,
-                                duration = SnackbarDuration.Long,
-                                actionLabel = actionButton
-                            )
-                            if (result == SnackbarResult.ActionPerformed) {
-                                lazyPagingItems.retry()
-                            }
-                        }
-                    },
-                    onItemClicked = { name ->
-                        mainNavController.navigate(DETAIL + name)
-                    }
+        list = lazyPagingItems,
+        onItemClicked = onItemClicked,
+        onFailedGetNextPage = {
+            scope.launch {
+                val result = snackbarHostState.showSnackbar(
+                    it,
+                    duration = SnackbarDuration.Long,
+                    actionLabel = actionButton
                 )
-            }
-            composable(MainScreenMenu.MyPokemon.route) {
-                Text(text = "text")
-            }
-        }
-
-    }
-}
-
-@Composable
-fun MainBottomBar(
-    navController: NavHostController,
-    modifier: Modifier = Modifier
-) {
-    NavigationBar(
-        modifier = modifier,
-        windowInsets = WindowInsets(bottom = 0.dp)
-    ) {
-        val navBackStackEntry by navController.currentBackStackEntryAsState()
-        val currentDestination = navBackStackEntry?.destination
-        MainScreenMenu.getMainScreenMenus().forEach { screen ->
-            NavigationBarItem(
-                icon = { Icon(screen.icon, contentDescription = null) },
-                label = { Text(stringResource(screen.resourceId)) },
-                selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
-                onClick = {
-                    navController.navigate(screen.route) {
-                        popUpTo(navController.graph.findStartDestination().id) {
-                            saveState = true
-                        }
-                        launchSingleTop = true
-                        restoreState = true
-                    }
+                if (result == SnackbarResult.ActionPerformed) {
+                    lazyPagingItems.retry()
                 }
-            )
-        }
-    }
+            }
+        },
+    )
 }
 
 @Composable
-fun MainContent(
+private fun ListScreen(
     modifier: Modifier = Modifier,
     list: LazyPagingItems<Pokemon>,
     onFailedGetNextPage: (String) -> Unit,
@@ -275,12 +202,22 @@ private fun LoadState.Error.getTitleMessage(): String {
 
 @Preview(showBackground = true)
 @Composable
-fun MainContentPreview() {
+fun ListScreenPreview() {
     AppTheme {
         Surface {
-            MainContent(
+            ListScreen(
                 modifier = Modifier.fillMaxSize(),
-                list = flowOf(PagingData.from(emptyList<Pokemon>())).collectAsLazyPagingItems(),
+                list = flowOf(
+                    PagingData.from(
+                        listOf(
+                            Pokemon(
+                                0,
+                                "Test",
+                                "Test"
+                            )
+                        )
+                    )
+                ).collectAsLazyPagingItems(),
                 onItemClicked = {},
                 onFailedGetNextPage = {}
             )
