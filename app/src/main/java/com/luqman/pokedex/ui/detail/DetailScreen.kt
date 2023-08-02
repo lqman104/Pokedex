@@ -463,3 +463,11 @@ fun DetailContentPreview() {
         )
     }
 }
+
+@Preview
+@Composable
+fun TopDetailPreview() {
+    TobBarDetail(Modifier.fillMaxWidth()) {
+        
+    }
+}
