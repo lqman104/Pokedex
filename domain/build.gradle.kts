@@ -50,6 +50,8 @@ dependencies {
     implementation(AndroidDependencies.AndroidX.Paging.compose)
 
     testImplementation(AndroidDependencies.Test.JUnit.plugin)
+    testImplementation(AndroidDependencies.Kotlin.Coroutine.testPlugin)
+    testImplementation(AndroidDependencies.Test.Mockito.plugin)
     androidTestImplementation(AndroidDependencies.AndroidX.Test.JUnit.plugin)
     androidTestImplementation(AndroidDependencies.AndroidX.Test.Espresso.plugin)
 }

@@ -96,6 +96,7 @@ object AndroidDependencies {
         object Coroutine {
             private const val version = "1.3.9"
             val plugin = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
+            val testPlugin = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version"
         }
     }
 
@@ -135,6 +136,11 @@ object AndroidDependencies {
         object JUnit {
             private const val version = "4.13.2"
             val plugin = "junit:junit:$version"
+        }
+
+        object Mockito {
+            private const val version = "5.4.0"
+            val plugin = "org.mockito:mockito-core:$version"
         }
     }
 
