@@ -23,7 +23,7 @@ class DetailViewModel @Inject constructor(
     private val storeUseCase: StorePokemonUseCase
 ) : ViewModel() {
 
-    private val selectedPokemonName = state.get<String>(NAME_PARAMETER)
+    private val selectedPokemonName: String? = state.get<String>(NAME_PARAMETER)
 
     private val _detailPokemon: MutableStateFlow<DetailScreenState> =
         MutableStateFlow(DetailScreenState())
